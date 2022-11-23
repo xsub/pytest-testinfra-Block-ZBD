@@ -64,6 +64,9 @@ class SshBackend(base.BaseBackend):
         if self.ssh_identity_file:
             cmd.append("-i %s")
             cmd_args.append(self.ssh_identity_file)
+        if self.ssh_jump_host:
+            cmd.append("-J %s")
+            cmd_args.append(self.ssh_jump_host)
         if "connecttimeout" not in (self.ssh_extra_args or "").lower():
             cmd.append("-o ConnectTimeout={}".format(self.timeout))
         if self.controlpersist and (
